@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { ArrowLeft } from 'lucide-react';
 import api from '../../lib/api';
 
 const loginSchema = z.object({
@@ -57,6 +58,17 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-6 transition-colors">
       <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8">
+        
+        <div className="mb-6 flex justify-start border-b border-slate-100 dark:border-slate-800 pb-3">
+          <Link 
+            to="/" 
+            className="inline-flex items-center space-x-1.5 text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white font-bold transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to Portal</span>
+          </Link>
+        </div>
+
         <div className="text-center mb-8">
           <div className="h-12 w-12 rounded-2xl bg-red-600 flex items-center justify-center text-white font-black text-2xl mx-auto shadow-md shadow-red-200 dark:shadow-none mb-4">
             B
