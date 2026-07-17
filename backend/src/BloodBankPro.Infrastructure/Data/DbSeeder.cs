@@ -40,7 +40,7 @@ public static class DbSeeder
         {
             "SuperAdmin", "FacilityAdmin", "MedicalDirector", "LabTechnologist",
             "InventoryManager", "DonorCoordinator", "RequestingPhysician", "Nurse",
-            "Auditor", "SystemAdmin"
+            "Auditor", "SystemAdmin", "Donor", "Recipient"
         };
 
         foreach (var role in roles)

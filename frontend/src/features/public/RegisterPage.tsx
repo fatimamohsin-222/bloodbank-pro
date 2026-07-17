@@ -59,7 +59,15 @@ export default function RegisterPage() {
       }, 3000);
     },
     onError: (err: any) => {
-      setErrorMsg(err.response?.data?.detail || err.response?.data?.title || 'Registration failed. Please verify your details.');
+      const data = err.response?.data;
+      if (data?.errors) {
+        const msgs = Object.values(data.errors).flat().join(' ');
+        setErrorMsg(msgs);
+      } else if (typeof data === 'string') {
+        setErrorMsg(data);
+      } else {
+        setErrorMsg(data?.detail || data?.title || 'Registration failed. Please verify your details.');
+      }
     }
   });
 

@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BloodBankPro.Api.Controllers;
 
 [Authorize]
+[Route("api/v1/public")]
 public class PublicPortalController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -28,7 +29,7 @@ public class PublicPortalController : BaseApiController
     [HttpGet("donor/profile")]
     public async Task<IActionResult> GetDonorProfile()
     {
-        var email = User.FindFirst(ClaimTypes.Email)?.Value;
+        var email = User.FindFirst(ClaimTypes.Email)?.Value ?? User.FindFirst("email")?.Value;
         if (string.IsNullOrEmpty(email)) return Unauthorized();
 
         var donors = await _unitOfWork.Donors.ListAllAsync();
@@ -57,7 +58,7 @@ public class PublicPortalController : BaseApiController
     [HttpGet("donor/sessions")]
     public async Task<IActionResult> GetDonorSessions()
     {
-        var email = User.FindFirst(ClaimTypes.Email)?.Value;
+        var email = User.FindFirst(ClaimTypes.Email)?.Value ?? User.FindFirst("email")?.Value;
         if (string.IsNullOrEmpty(email)) return Unauthorized();
 
         var donors = await _unitOfWork.Donors.ListAllAsync();
@@ -89,7 +90,7 @@ public class PublicPortalController : BaseApiController
     [HttpPost("donor/sessions")]
     public async Task<IActionResult> ScheduleSession([FromBody] ScheduleSessionDto dto)
     {
-        var email = User.FindFirst(ClaimTypes.Email)?.Value;
+        var email = User.FindFirst(ClaimTypes.Email)?.Value ?? User.FindFirst("email")?.Value;
         if (string.IsNullOrEmpty(email)) return Unauthorized();
 
         var donors = await _unitOfWork.Donors.ListAllAsync();
@@ -120,7 +121,7 @@ public class PublicPortalController : BaseApiController
     [HttpGet("recipient/requests")]
     public async Task<IActionResult> GetRecipientRequests()
     {
-        var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value;
         if (string.IsNullOrEmpty(currentUserId)) return Unauthorized();
 
         var userId = Guid.Parse(currentUserId);
@@ -152,7 +153,7 @@ public class PublicPortalController : BaseApiController
     [HttpPost("recipient/requests")]
     public async Task<IActionResult> CreateRecipientRequest([FromBody] PublicBloodRequestCreateDto dto)
     {
-        var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value;
         if (string.IsNullOrEmpty(currentUserId)) return Unauthorized();
 
         var userId = Guid.Parse(currentUserId);

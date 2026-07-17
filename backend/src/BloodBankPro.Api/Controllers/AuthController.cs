@@ -217,7 +217,7 @@ public class AuthController : BaseApiController
     [Authorize]
     public async Task<IActionResult> GetMe()
     {
-        var email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+        var email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? User.FindFirst("email")?.Value;
         if (string.IsNullOrEmpty(email))
         {
             return Unauthorized();
