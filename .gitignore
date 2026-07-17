@@ -1,0 +1,24 @@
+# dotnet ignore
+bin/
+obj/
+*.suo
+*.user
+*.sln.docstates
+.vs/
+App_Data/
+logs/
+*.log
+
+# node ignore
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.*.local
+.eslintcache
+.vscode/
+
+# Docker/OS ignore
+.DS_Store
+Thumbs.db

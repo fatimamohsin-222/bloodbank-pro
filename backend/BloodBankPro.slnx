@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BloodBankPro.Api/BloodBankPro.Api.csproj" />
+    <Project Path="src/BloodBankPro.Application/BloodBankPro.Application.csproj" />
+    <Project Path="src/BloodBankPro.Domain/BloodBankPro.Domain.csproj" />
+    <Project Path="src/BloodBankPro.Infrastructure/BloodBankPro.Infrastructure.csproj" />
+  </Folder>
+</Solution>
